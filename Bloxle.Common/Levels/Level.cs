@@ -37,6 +37,15 @@ namespace Bloxle.Common.Levels
             return true;
         }
 
+        public bool WithinBounds(Vector2 tilePosition)
+        {
+            if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < _width && tilePosition.Y < _height)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool CycleTilesFromPosition(Vector2 tilePosition, int[,] inputMask)
         {
             if (tilePosition.X < 0 || tilePosition.Y < 0 || tilePosition.X >= _width || tilePosition.Y >= _height)

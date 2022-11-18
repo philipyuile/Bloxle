@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
+using Bloxle.Common.Commands;
 using Bloxle.Common.Interfaces;
 using Bloxle.Common.Storage;
 using Bloxle.Common.Enums;
@@ -163,9 +164,14 @@ namespace Bloxle.Game.Game
                         return;
                     }
 
-                    if (inputCommand.Execute())
+
+                    if (inputCommand is MoveCommand && inputCommand.Execute())
                     {
                         _playerScore++;
+                    }
+                    else if (inputCommand is UndoCommand && inputCommand.Execute())
+                    {
+                        _playerScore--;
                     }
                 }
 
@@ -358,6 +364,8 @@ namespace Bloxle.Game.Game
                 {
                     DrawTile(tile.colour, tile.position);
                 }
+
+                DrawTile(TileColour.Red, new Vector2 { X = 9, Y = 0 });
             }
 
             if (Status == GameStatus.Success || Status == GameStatus.Failure)

@@ -6,6 +6,8 @@ using Bloxle.Common.Interfaces;
 using Bloxle.Common.Commands;
 using Bloxle.Common.Levels;
 using Bloxle.Game.Commands;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bloxle.Game.Input
 {
@@ -14,13 +16,13 @@ namespace Bloxle.Game.Input
         private MouseState _lastMouseState;
         private Level _tileGrid;
         private Vector2 _gridOrigin;
-        private int[,] _inputMask;
+        private Stack<Vector2> _moveStack;
 
         public PlayerGameInput(Level tileGrid, Vector2 gridOrigin) {
             _lastMouseState = Mouse.GetState();
             _tileGrid = tileGrid;
             _gridOrigin = gridOrigin;
-            _inputMask = InputMask.PlayerMask;
+            _moveStack = new Stack<Vector2>();
             
         }
 
@@ -40,7 +42,18 @@ namespace Bloxle.Game.Input
                 var mousePosition = new Vector2(mouseState.X, mouseState.Y);
                 var tilePosition = ConvertToTilePosition(mousePosition);
 
-                command = new CycleCommand(_tileGrid, tilePosition, _inputMask);
+                if (_tileGrid.WithinBounds(tilePosition))
+                {
+                    _moveStack.Push(tilePosition);
+                    command = new MoveCommand(_tileGrid, tilePosition);
+                }
+                else if (tilePosition.X == 9 && tilePosition.Y == 0)
+                {
+                    if (_moveStack.Any()) {
+                        Vector2 lastMovePosition = _moveStack.Pop();
+                        command = new UndoCommand(_tileGrid, lastMovePosition);
+                    }
+                }
             }
 
             _lastMouseState = mouseState;

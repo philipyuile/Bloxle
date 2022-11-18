@@ -8,9 +8,9 @@ namespace Bloxle.Common.Commands
     {
         public readonly Vector2 TilePosition;
 
-        private Level _tileGrid;
+        protected Level _tileGrid;
 
-        private int[,] _inputMask;
+        protected int[,] _inputMask;
 
         public CycleCommand(Level tileGrid, Vector2 tilePosition, int[,] inputMask)
         {
