@@ -7,26 +7,26 @@ namespace Bloxle.Common.Levels
 {
     public class Level
     {
-        public Tile[,] _tileGrid;
+        public Tile[,] TileGrid;
 
-        public int _width;
-        public int _height;
-        public int _targetScore;
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int TargetScore { get; set; }
 
         public readonly int _numberOfColours;
 
-        public Level(int width, int height)
+        public Level(int width, int height, int targetScore)
         {
-            _width = width;
-            _height = height;
-            _tileGrid = new Tile[_width, _height];
+            Width = width;
+            Height = height;
+            TileGrid = new Tile[Width, Height];
             _numberOfColours = Enum.GetNames(typeof(TileColour)).Length;
-            _targetScore = 0;
+            TargetScore = targetScore;
         }
 
         public bool AllTilesAreThisColour(TileColour colour)
         {
-            foreach (var tile in _tileGrid)
+            foreach (var tile in TileGrid)
             {
                 if (tile.colour != colour)
                 {
@@ -39,7 +39,7 @@ namespace Bloxle.Common.Levels
 
         public bool WithinBounds(Vector2 tilePosition)
         {
-            if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < _width && tilePosition.Y < _height)
+            if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < Width && tilePosition.Y < Height)
             {
                 return true;
             }
@@ -48,7 +48,7 @@ namespace Bloxle.Common.Levels
 
         public bool CycleTilesFromPosition(Vector2 tilePosition, int[,] inputMask)
         {
-            if (tilePosition.X < 0 || tilePosition.Y < 0 || tilePosition.X >= _width || tilePosition.Y >= _height)
+            if (tilePosition.X < 0 || tilePosition.Y < 0 || tilePosition.X >= Width || tilePosition.Y >= Height)
             {
                 return false;
             }
@@ -64,9 +64,9 @@ namespace Bloxle.Common.Levels
                     var absoluteXPos = x + j - maskOffset;
                     var absoluteYPos = y + i - maskOffset;
 
-                    if (absoluteXPos >= 0 && absoluteXPos < _width && absoluteYPos >= 0 && absoluteYPos < _height)
+                    if (absoluteXPos >= 0 && absoluteXPos < Width && absoluteYPos >= 0 && absoluteYPos < Height)
                     {
-                        _tileGrid[absoluteXPos,absoluteYPos].colour = (TileColour)((int)((_tileGrid[absoluteXPos, absoluteYPos].colour) + inputMask[i,j] + _numberOfColours) % _numberOfColours);
+                        TileGrid[absoluteXPos,absoluteYPos].colour = (TileColour)((int)((TileGrid[absoluteXPos, absoluteYPos].colour) + inputMask[i,j] + _numberOfColours) % _numberOfColours);
                     }
                 }
             }
@@ -76,23 +76,13 @@ namespace Bloxle.Common.Levels
 
         public void InitBlank(TileColour tileColour)
         {
-            for (int i = 0; i < _width; i++)
+            for (int i = 0; i < Width; i++)
             {
-                for (int j = 0; j < _height; j++)
+                for (int j = 0; j < Height; j++)
                 {
-                    _tileGrid[i, j] = new Tile { colour = tileColour, position = new Vector2(i, j) };
+                    TileGrid[i, j] = new Tile { colour = tileColour, position = new Vector2(i, j) };
                 }
             }
-        }
-
-        public int GetTargetScore()
-        {
-            return _targetScore;
-        }
-
-        public void SetTargetScore(int targetScore)
-        {
-            _targetScore = targetScore;
         }
     }
 }

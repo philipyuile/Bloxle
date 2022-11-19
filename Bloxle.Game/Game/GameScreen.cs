@@ -91,7 +91,7 @@ namespace Bloxle.Game.Game
             _gameStorage = new GenerationFileStorage(_levelFolder, SelectedLevel);
 
             _levelGrid = _gameStorage.LoadGameFile();
-            _targetScore = _levelGrid.GetTargetScore();
+            _targetScore = _levelGrid.TargetScore;
 
             _gameInput = new PlayerGameInput(_levelGrid, _gridOrigin);
         }
@@ -362,7 +362,7 @@ namespace Bloxle.Game.Game
 
                 DrawLine(new Vector2(256, 20), new Vector2(256, 430), Color.White);
 
-                foreach (var tile in _levelGrid._tileGrid)
+                foreach (var tile in _levelGrid.TileGrid)
                 {
                     DrawTile(tile.colour, tile.position);
                 }
