@@ -367,6 +367,7 @@ namespace Bloxle.Game.Game
                     DrawTile(tile.colour, tile.position);
                 }
 
+                _spriteBatch.DrawString(_textFont, "Undo", new Vector2(705, 90), Color.White);
                 DrawTile(TileColour.Red, new Vector2 { X = 9, Y = 0 });
             }
 
