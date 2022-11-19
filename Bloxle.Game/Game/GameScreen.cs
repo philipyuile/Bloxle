@@ -37,12 +37,13 @@ namespace Bloxle.Game.Game
         GameProgress _gameProgress;
         GameProgressStorage _gameProgressStorage;
 
+        IGameInput _menuInput;
         IGameInput _gameInput;
+        IGameInput _endGameInput;
+
         IGameStorage _gameStorage;
         Level _levelGrid;
 
-
-        IGameInput _menuInput;
         MenuCollectionStorage _menuStorage;
         MenuGrid _menuGrid;
 
@@ -106,6 +107,7 @@ namespace Bloxle.Game.Game
             _menuGrid.SelectedLevel = 0;
 
             _menuInput = new PlayerMenuInput(_menuGrid, _gridOrigin, _gameProgress);
+            _endGameInput = new PlayerEndGameInput();
         }
 
         protected override void LoadContent()
@@ -208,7 +210,7 @@ namespace Bloxle.Game.Game
             }
             else if (Status == GameStatus.Failure || Status == GameStatus.Success)
             {
-                inputCommand = _gameInput.GetInputCommand();
+                inputCommand = _endGameInput.GetInputCommand();
 
                 if (inputCommand != null)
                 {
