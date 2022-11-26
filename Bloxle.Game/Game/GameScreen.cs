@@ -114,12 +114,12 @@ namespace Bloxle.Game.Game
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tilesTexture = Content.Load<Texture2D>("Tiles/Shiny1");
+            _tilesTexture = Content.Load<Texture2D>("Tiles/BasicTiles");
             _tilesTextureDictionary = new Dictionary<TileColour, Rectangle>();
-            _tilesTextureDictionary.Add(TileColour.Red, new Rectangle(144, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Yellow, new Rectangle(240, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Green, new Rectangle(288, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Blue, new Rectangle(384, 0, 48, 48));
+            _tilesTextureDictionary.Add(TileColour.Red, new Rectangle(0, 0, 48, 48));
+            _tilesTextureDictionary.Add(TileColour.Yellow, new Rectangle(48, 0, 48, 48));
+            _tilesTextureDictionary.Add(TileColour.Green, new Rectangle(96, 0, 48, 48));
+            _tilesTextureDictionary.Add(TileColour.Blue, new Rectangle(144, 0, 48, 48));
 
             _arrowsTexture = Content.Load<Texture2D>("Arrows/arrows");
             _arrowsTextureDictionary = new Dictionary<ArrowDirection, Rectangle>();
