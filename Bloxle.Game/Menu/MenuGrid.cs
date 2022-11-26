@@ -102,6 +102,11 @@ namespace Bloxle.Game.Menu
 
         public int PageOfLevel(int level)
         {
+            if (!_levels.Any(l => l.LevelNumber == level))
+            {
+                return _levels.Select(x => x.Page).Max();
+            }
+
             return _levels.First(l => l.LevelNumber == level).Page;
         }
     }
