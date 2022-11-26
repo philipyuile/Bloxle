@@ -41,6 +41,14 @@ namespace Bloxle.Game.Input
                 {
                     command = new MenuSelectionCommand(_menuGrid, tilePosition, _gameProgress);
                 }
+                else if (tilePosition.X == 5 && tilePosition.Y == 3)
+                {
+                    command = new MenuPageDecrementCommand(_menuGrid);
+                }
+                else if (tilePosition.X == 6 && tilePosition.Y == 3)
+                {
+                    command = new MenuPageIncrementCommand(_menuGrid);
+                }
             }
 
             _lastMouseState = mouseState;

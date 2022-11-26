@@ -7,5 +7,7 @@ namespace Bloxle.Game.Menu
         public int LevelNumber { get; set; }
 
         public Vector2 Position { get; set; }
+
+        public int Page { get; set; }
     }
 }

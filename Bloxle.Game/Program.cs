@@ -6,7 +6,7 @@ namespace Bloxle
 {
     public static class Program
     {
-        const int NUMBER_OF_LEVELS_SHOWN = 20;
+        const int NUMBER_OF_LEVELS_SHOWN = 50;
 
         [STAThread]
         static void Main()

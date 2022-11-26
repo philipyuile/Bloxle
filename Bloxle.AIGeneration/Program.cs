@@ -6,9 +6,8 @@ namespace Bloxle.AIGeneration
     {
         static void Main()
         {
-            const int NUMBER_OF_LEVELS = 20;
+            const int NUMBER_OF_LEVELS = 50;
 
-            //var engine = new AIGenerationEngine();
             var engine = new RandomDifficultyIndexGenerationEngine();
             engine.Generate(NUMBER_OF_LEVELS);
         }

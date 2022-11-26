@@ -105,6 +105,7 @@ namespace Bloxle.Game.Game
             _menuGrid = new MenuGrid(_menuGridWidth, _numberOfLevels);
             _menuGrid.PopulateMenuItems(menuItems);
             _menuGrid.SelectedLevel = 0;
+            _menuGrid.CurrentPageNumber = _menuGrid.PageOfLevel(_gameProgress.GetMinimumIncompleteLevel());
 
             _menuInput = new PlayerMenuInput(_menuGrid, _gridOrigin, _gameProgress);
             _endGameInput = new PlayerEndGameInput();
@@ -272,6 +273,25 @@ namespace Bloxle.Game.Game
             }
         }
 
+        private void DrawMenuPaginationTile(bool isIncrement, Vector2 position)
+        {
+            var drawablePosition = ConvertToDrawableMenuPosition(position);
+            _spriteBatch.Draw(
+             _menuTileRectangle,
+             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, 80, 80),
+             new Color(20, 20, 20, 200)
+            );
+
+            if (isIncrement)
+            {
+                _spriteBatch.DrawString(_headerFont, $">", new Vector2(drawablePosition.X + 27, drawablePosition.Y + 15), Color.White);
+            }
+            else
+            {
+                _spriteBatch.DrawString(_headerFont, "<", new Vector2(drawablePosition.X + 27, drawablePosition.Y + 15), Color.White);
+            }
+        }
+
         private void DrawGhostTile(int moveNumber, Vector2 position)
         {
             var drawablePosition = ConvertToDrawableTilePosition(position);
@@ -389,11 +409,13 @@ namespace Bloxle.Game.Game
             {
                 _spriteBatch.DrawString(_headerFont, $"Choose a level: ", new Vector2(100, 10), Color.White);
 
-                foreach (var tile in _menuGrid.GetLevels())
+                foreach (var tile in _menuGrid.GetLevelsForCurrentPage())
                 {
                     DrawMenuTile(tile.LevelNumber, tile.Position);
                 }
 
+                DrawMenuPaginationTile(false, new Vector2(5, 3));
+                DrawMenuPaginationTile(true, new Vector2(6, 3));
             }
 
             _spriteBatch.End();
