@@ -22,7 +22,7 @@ namespace Bloxle.Game.Game
 #if DEBUG
         public string _levelFolder = "../../../../Bloxle.AIGeneration/bin/Debug/net5.0/Content/Levels/";
 #else
-        public string _levelFolder = "/Content/Levels/";
+        public string _levelFolder = "Content/Levels/";
 #endif
         public string _progressFolder = "Content/Progress/";
 
