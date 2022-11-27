@@ -23,8 +23,12 @@ namespace Bloxle.AIGeneration.AIGeneration
             {
                 ILevelGenerator levelGenerator;
                 Random r = new Random();
-                
-                if (r.NextDouble() > 0.2)
+                var randomDouble = r.NextDouble();
+                if (randomDouble < 0.2)
+                {
+                    levelGenerator = new RingLevelGenerator();
+                }
+                else if (randomDouble < 0.8)
                 {
                     levelGenerator = new SquareLevelGenerator();
                 }

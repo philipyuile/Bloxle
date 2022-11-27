@@ -33,8 +33,13 @@ namespace Bloxle.AIGeneration.Input
 
             do
             {
-                x = r.Next(_tileGrid.Width);
-                y = r.Next(_tileGrid.Height);
+                do
+                {
+                    x = r.Next(_tileGrid.Width);
+                    y = r.Next(_tileGrid.Height);
+                }
+                while (!_tileGrid.IsWithinBounds(new Vector2(x, y)));
+
                 lookupKey = $"{x},{y}";
 
                 if (!_alreadyMovedHereLookup.TryGetValue(lookupKey, out numberOfMovesOnAlreadySquare))

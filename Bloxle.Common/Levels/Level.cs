@@ -37,7 +37,7 @@ namespace Bloxle.Common.Levels
             return true;
         }
 
-        public bool WithinBounds(Vector2 tilePosition)
+        public bool IsWithinBounds(Vector2 tilePosition)
         {
             if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < Width && tilePosition.Y < Height && TileGrid[(int)tilePosition.X, (int)tilePosition.Y].IsActive)
             {

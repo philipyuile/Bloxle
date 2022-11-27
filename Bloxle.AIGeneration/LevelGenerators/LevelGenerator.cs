@@ -19,7 +19,6 @@ namespace Bloxle.AIGeneration.LevelGenerators
             SetNumberOfMoves();
             _level = new Level(_width, _height, _numberOfMoves);
             InitialiseBlankGrid();
-
         }
 
         public Level Level{ get { return _level; } }
@@ -38,7 +37,7 @@ namespace Bloxle.AIGeneration.LevelGenerators
 
         public virtual double CalculateDifficultyIndex()
         {
-            return (_level.Width + _level.Height) * _level.TargetScore;
+            return (_width + _height) * _level.TargetScore;
         }
 
         protected abstract void SetWidthAndHeight();

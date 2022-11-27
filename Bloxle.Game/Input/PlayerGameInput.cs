@@ -42,7 +42,7 @@ namespace Bloxle.Game.Input
                 var mousePosition = new Vector2(mouseState.X, mouseState.Y);
                 var tilePosition = ConvertToTilePosition(mousePosition);
 
-                if (_tileGrid.WithinBounds(tilePosition))
+                if (_tileGrid.IsWithinBounds(tilePosition))
                 {
                     _moveStack.Push(tilePosition);
                     command = new MoveCommand(_tileGrid, tilePosition);
