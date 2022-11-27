@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Bloxle.AIGeneration.Input
 {
-    class AIGenerationInput : IGameInput
+    public class AIGenerationInput : IGameInput
     {
         private Level _tileGrid;
         private int[,] _inputMask;
