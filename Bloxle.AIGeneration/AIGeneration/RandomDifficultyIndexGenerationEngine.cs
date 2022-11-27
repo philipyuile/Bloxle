@@ -58,7 +58,7 @@ namespace Bloxle.AIGeneration.AIGeneration
                 int numberOfMoves = r.Next((int)(width * height * MIN_MOVES_GRID_AREA_RATIO + 1), (int) (width * height * MAX_MOVES_GRID_AREA_RATIO + 1));
 
                 Level levelGrid = new Level(width, height, numberOfMoves);               
-                levelGrid.InitBlank(TileColour.Green);
+                levelGrid.InitBlankRectangle();
 
                 _input = new AIGenerationInput(levelGrid);
 

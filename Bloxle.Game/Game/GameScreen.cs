@@ -384,7 +384,10 @@ namespace Bloxle.Game.Game
 
                 foreach (var tile in _levelGrid.TileGrid)
                 {
-                    DrawTile(tile.colour, tile.position);
+                    if (tile.IsActive)
+                    {
+                        DrawTile(tile.Colour, tile.Position);
+                    }
                 }
 
                 _spriteBatch.DrawString(_textFont, "Undo", new Vector2(705, 90), Color.White);

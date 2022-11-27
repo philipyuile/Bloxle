@@ -6,8 +6,10 @@ namespace Bloxle.Common.Levels
 {
     public class Tile
     {
-        public Vector2 position;
+        public Vector2 Position;
 
-        public TileColour colour;
+        public bool IsActive;
+
+        public TileColour Colour;
     }
 }

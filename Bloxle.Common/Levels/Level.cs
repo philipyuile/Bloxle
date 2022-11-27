@@ -28,7 +28,7 @@ namespace Bloxle.Common.Levels
         {
             foreach (var tile in TileGrid)
             {
-                if (tile.colour != colour)
+                if (tile.IsActive && tile.Colour != colour)
                 {
                     return false;
                 }
@@ -39,7 +39,7 @@ namespace Bloxle.Common.Levels
 
         public bool WithinBounds(Vector2 tilePosition)
         {
-            if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < Width && tilePosition.Y < Height)
+            if (tilePosition.X >= 0 && tilePosition.Y >= 0 && tilePosition.X < Width && tilePosition.Y < Height && TileGrid[(int)tilePosition.X, (int)tilePosition.Y].IsActive)
             {
                 return true;
             }
@@ -55,6 +55,12 @@ namespace Bloxle.Common.Levels
 
             var x = (int)tilePosition.X;
             var y = (int)tilePosition.Y;
+
+            if (!TileGrid[x, y].IsActive)
+            {
+                return false;
+            }
+
             var maskOffset = (inputMask.GetLength(0) - 1) / 2;
 
             for (int i = 0; i < inputMask.GetLength(0); i++)
@@ -64,9 +70,9 @@ namespace Bloxle.Common.Levels
                     var absoluteXPos = x + j - maskOffset;
                     var absoluteYPos = y + i - maskOffset;
 
-                    if (absoluteXPos >= 0 && absoluteXPos < Width && absoluteYPos >= 0 && absoluteYPos < Height)
+                    if (absoluteXPos >= 0 && absoluteXPos < Width && absoluteYPos >= 0 && absoluteYPos < Height && TileGrid[absoluteXPos, absoluteYPos].IsActive)
                     {
-                        TileGrid[absoluteXPos,absoluteYPos].colour = (TileColour)((int)((TileGrid[absoluteXPos, absoluteYPos].colour) + inputMask[i,j] + _numberOfColours) % _numberOfColours);
+                        TileGrid[absoluteXPos,absoluteYPos].Colour = (TileColour)((int)((TileGrid[absoluteXPos, absoluteYPos].Colour) + inputMask[i,j] + _numberOfColours) % _numberOfColours);
                     }
                 }
             }
@@ -74,13 +80,13 @@ namespace Bloxle.Common.Levels
             return true;
         }
 
-        public void InitBlank(TileColour tileColour)
+        public void InitBlankRectangle()
         {
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    TileGrid[i, j] = new Tile { colour = tileColour, position = new Vector2(i, j) };
+                    TileGrid[i, j] = new Tile { Colour = TileColour.Green, Position = new Vector2(i, j), IsActive = true };
                 }
             }
         }
