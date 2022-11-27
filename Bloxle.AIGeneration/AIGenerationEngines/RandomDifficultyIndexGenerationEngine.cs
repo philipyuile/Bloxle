@@ -24,9 +24,17 @@ namespace Bloxle.AIGeneration.AIGeneration
                 ILevelGenerator levelGenerator;
                 Random r = new Random();
                 var randomDouble = r.NextDouble();
-                if (randomDouble < 0.2)
+                if (randomDouble < 0.1)
                 {
                     levelGenerator = new RingLevelGenerator();
+                }
+                else if (randomDouble < 0.2)
+                {
+                    levelGenerator = new LeafLevelGenerator();
+                }
+                else if (randomDouble < 0.3)
+                {
+                    levelGenerator = new CrossLevelGenerator();
                 }
                 else if (randomDouble < 0.8)
                 {

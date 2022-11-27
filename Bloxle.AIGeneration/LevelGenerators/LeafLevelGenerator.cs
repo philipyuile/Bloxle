@@ -2,13 +2,13 @@
 
 namespace Bloxle.AIGeneration.LevelGenerators
 {
-    public class SquareLevelGenerator : LevelGenerator
+    public class LeafLevelGenerator : LevelGenerator
     {
-        const int MIN_SQUARE_GRID_SIZE = 3;
-        const int MAX_SQUARE_GRID_SIZE = 6;
-        const int MIN_SUM_GRID_LENGTH_WIDTH = 6;
+
+        const int MIN_SQUARE_GRID_SIZE = 5;
+        const int MAX_SQUARE_GRID_SIZE = 7;
         const double MIN_MOVES_GRID_AREA_RATIO = 0.2;
-        const double MAX_MOVES_GRID_AREA_RATIO = 0.5;
+        const double MAX_MOVES_GRID_AREA_RATIO = 0.45;
 
         protected override void SetWidthAndHeight()
         {
@@ -16,7 +16,7 @@ namespace Bloxle.AIGeneration.LevelGenerators
             int width = 0;
             int height = 0;
 
-            while (height + width < MIN_SUM_GRID_LENGTH_WIDTH)
+            while (width % 2 == 0)
             {
                 width = r.Next(MIN_SQUARE_GRID_SIZE, MAX_SQUARE_GRID_SIZE + 1);
                 height = width;
@@ -33,9 +33,24 @@ namespace Bloxle.AIGeneration.LevelGenerators
             _numberOfMoves = r.Next((int)(_width * _width * MIN_MOVES_GRID_AREA_RATIO + 1), (int)(_width * _width * MAX_MOVES_GRID_AREA_RATIO + 1));
         }
 
+
         protected override void InitialiseBlankGrid()
         {
             Level.InitBlankRectangle();
+
+            foreach (var tile in Level.TileGrid)
+            { 
+                if ((tile.Position.X == _width / 2 && (tile.Position.Y < _width / 2 - 1 || tile.Position.Y > _width / 2 + 1))
+                    || (tile.Position.Y == _width / 2 && (tile.Position.X < _width / 2 - 1 || tile.Position.X > _width / 2 + 1)))
+                {
+                    tile.IsActive = false;
+                }
+            }
+        }
+
+        public override double CalculateDifficultyIndex()
+        {
+            return (2 * _width - 1) * _level.TargetScore;
         }
     }
 }

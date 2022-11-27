@@ -2,10 +2,10 @@
 
 namespace Bloxle.AIGeneration.LevelGenerators
 {
-    public class RingLevelGenerator : LevelGenerator
+    public class StarLevelGenerator : LevelGenerator
     {
 
-        const int MIN_SQUARE_GRID_SIZE = 3;
+        const int MIN_SQUARE_GRID_SIZE = 5;
         const int MAX_SQUARE_GRID_SIZE = 7;
         const double MIN_MOVES_GRID_AREA_RATIO = 0.2;
         const double MAX_MOVES_GRID_AREA_RATIO = 0.4;
@@ -15,7 +15,7 @@ namespace Bloxle.AIGeneration.LevelGenerators
             Random r = new Random();
             int width = 0;
             int height = 0;
-
+            
             while (width % 2 == 0)
             {
                 width = r.Next(MIN_SQUARE_GRID_SIZE, MAX_SQUARE_GRID_SIZE + 1);
@@ -38,12 +38,16 @@ namespace Bloxle.AIGeneration.LevelGenerators
         {
             Level.InitBlankRectangle();
 
+            int extraCutOut = _width >= 7 ? 1 : 0;
+
             foreach (var tile in Level.TileGrid)
-            { 
-                if ((_width <= 5 && tile.Position.X == _width / 2  && tile.Position.Y ==_width / 2)
-                    ||
-                    (_width > 5 && tile.Position.X - 1 <= _width / 2 && tile.Position.X + 1 >= _width / 2
-                               && tile.Position.Y - 1 <= _width / 2 && tile.Position.Y + 1 >= _width / 2))
+            {
+                
+                if ((tile.Position.X <= extraCutOut && tile.Position.Y <= _width / 2 + extraCutOut && tile.Position.Y >= _width / 2 - extraCutOut)
+                    || (tile.Position.Y <= extraCutOut && tile.Position.X <= _width / 2 + extraCutOut && tile.Position.X >= _width / 2 - extraCutOut)
+                    || (tile.Position.X + 1 >= _width - extraCutOut && tile.Position.Y <= _width / 2 + extraCutOut && tile.Position.Y >= _width / 2 - extraCutOut)
+                    || (tile.Position.Y + 1 >= _width - extraCutOut && tile.Position.X <= _width / 2 + extraCutOut && tile.Position.X >= _width / 2 - extraCutOut)
+                    )
                 {
                     tile.IsActive = false;
                 }
