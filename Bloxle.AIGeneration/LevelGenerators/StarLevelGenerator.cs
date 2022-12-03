@@ -7,8 +7,6 @@ namespace Bloxle.AIGeneration.LevelGenerators
 
         const int MIN_SQUARE_GRID_SIZE = 5;
         const int MAX_SQUARE_GRID_SIZE = 7;
-        const double MIN_MOVES_GRID_AREA_RATIO = 0.2;
-        const double MAX_MOVES_GRID_AREA_RATIO = 0.4;
 
         protected override void SetWidthAndHeight()
         {
@@ -24,15 +22,10 @@ namespace Bloxle.AIGeneration.LevelGenerators
 
             _width = width;
             _height = height;
+
+            _minMovesGridAreaRatio = 0.2;
+            _maxMovesGridAreaRatio = 0.55;
         }
-
-        protected override void SetNumberOfMoves()
-        {
-            Random r = new Random();
-
-            _numberOfMoves = r.Next((int)(_width * _width * MIN_MOVES_GRID_AREA_RATIO + 1), (int)(_width * _width * MAX_MOVES_GRID_AREA_RATIO + 1));
-        }
-
 
         protected override void InitialiseBlankGrid()
         {
@@ -52,11 +45,6 @@ namespace Bloxle.AIGeneration.LevelGenerators
                     tile.IsActive = false;
                 }
             }
-        }
-
-        public override double CalculateDifficultyIndex()
-        {
-            return (2 * _width - 1) * _level.TargetScore;
         }
     }
 }

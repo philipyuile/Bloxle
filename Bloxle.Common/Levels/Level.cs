@@ -15,13 +15,12 @@ namespace Bloxle.Common.Levels
 
         public readonly int _numberOfColours;
 
-        public Level(int width, int height, int targetScore)
+        public Level(int width, int height)
         {
             Width = width;
             Height = height;
             TileGrid = new Tile[Width, Height];
             _numberOfColours = Enum.GetNames(typeof(TileColour)).Length;
-            TargetScore = targetScore;
         }
 
         public bool AllTilesAreThisColour(TileColour colour)

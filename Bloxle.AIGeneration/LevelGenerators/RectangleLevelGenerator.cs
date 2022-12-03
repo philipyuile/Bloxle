@@ -7,8 +7,6 @@ namespace Bloxle.AIGeneration.LevelGenerators
         const int MIN_GRID_SIZE = 2;
         const int MAX_GRID_SIZE = 6;
         const int MIN_SUM_GRID_LENGTH_WIDTH = 6;
-        const double MIN_MOVES_GRID_AREA_RATIO = 0.2;
-        const double MAX_MOVES_GRID_AREA_RATIO = 0.6;
 
         protected override void SetWidthAndHeight()
         {
@@ -24,13 +22,8 @@ namespace Bloxle.AIGeneration.LevelGenerators
 
             _width = width;
             _height = height;
-        }
-
-        protected override void SetNumberOfMoves()
-        {
-            Random r = new Random();
-
-            _numberOfMoves = r.Next((int)(_width * _height * MIN_MOVES_GRID_AREA_RATIO + 1), (int)(_width * _height * MAX_MOVES_GRID_AREA_RATIO + 1));
+            _minMovesGridAreaRatio = 0.25;
+            _maxMovesGridAreaRatio = 0.55;
         }
 
         protected override void InitialiseBlankGrid()

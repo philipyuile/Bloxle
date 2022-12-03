@@ -13,12 +13,16 @@ namespace Bloxle.AIGeneration.LevelGenerators
         protected int _numberOfMoves;
         protected Level _level;
 
+        protected double _minMovesGridAreaRatio = 0.2;
+        protected double _maxMovesGridAreaRatio = 0.45;
+
         public void InitialiseLevel()
         {
             SetWidthAndHeight();
-            SetNumberOfMoves();
-            _level = new Level(_width, _height, _numberOfMoves);
+            _level = new Level(_width, _height);
             InitialiseBlankGrid();
+            SetNumberOfMoves();
+            _level.TargetScore = _numberOfMoves;
         }
 
         public Level Level{ get { return _level; } }
@@ -37,12 +41,18 @@ namespace Bloxle.AIGeneration.LevelGenerators
 
         public virtual double CalculateDifficultyIndex()
         {
-            return (_width + _height) * _level.TargetScore;
+            return _level.TargetScore;
+        }
+
+        protected virtual void SetNumberOfMoves()
+        {
+            int gridArea = _level.TileGrid.Length;
+            Random r = new Random();
+
+            _numberOfMoves = r.Next((int)(gridArea * _minMovesGridAreaRatio + 1), (int)(gridArea * _maxMovesGridAreaRatio + 1));
         }
 
         protected abstract void SetWidthAndHeight();
-
-        protected abstract void SetNumberOfMoves();
 
         protected abstract void InitialiseBlankGrid();
     }
