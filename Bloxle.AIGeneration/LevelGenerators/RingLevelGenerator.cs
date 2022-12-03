@@ -5,7 +5,7 @@ namespace Bloxle.AIGeneration.LevelGenerators
     public class RingLevelGenerator : LevelGenerator
     {
 
-        const int MIN_SQUARE_GRID_SIZE = 3;
+        const int MIN_SQUARE_GRID_SIZE = 5;
         const int MAX_SQUARE_GRID_SIZE = 7;
         const double MIN_MOVES_GRID_AREA_RATIO = 0.2;
         const double MAX_MOVES_GRID_AREA_RATIO = 0.4;
