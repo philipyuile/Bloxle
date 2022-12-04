@@ -19,8 +19,8 @@ namespace Bloxle.Game.Shared.Game
 {
     public class GameScreen : Microsoft.Xna.Framework.Game
     {
-        string _levelFolder = "Content/Levels/";
-        string _progressFolder = "Content/Progress/";
+        string _levelFolder;
+        string _progressFolder;
 
         Texture2D _tilesTexture;
         Texture2D _arrowsTexture;
