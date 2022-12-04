@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 using Bloxle.Common.Interfaces;
 using Bloxle.Game.Shared.Commands;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Bloxle.Game.Shared.Input
 {
@@ -28,6 +29,17 @@ namespace Bloxle.Game.Shared.Input
             if (mouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)
             {
                 command = new ExitCommand();
+            }
+
+
+            var touchState = TouchPanel.GetState();
+
+            foreach (var touch in touchState)
+            {
+                if (touch.State == TouchLocationState.Released)
+                {
+                    command = new ExitCommand();
+                }
             }
 
             _lastMouseState = mouseState;

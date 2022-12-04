@@ -8,11 +8,415 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\level1.json" />
+    <None Remove="Assets\level10.json" />
+    <None Remove="Assets\level100.json" />
+    <None Remove="Assets\level11.json" />
+    <None Remove="Assets\level12.json" />
+    <None Remove="Assets\level13.json" />
+    <None Remove="Assets\level14.json" />
+    <None Remove="Assets\level15.json" />
+    <None Remove="Assets\level16.json" />
+    <None Remove="Assets\level17.json" />
+    <None Remove="Assets\level18.json" />
+    <None Remove="Assets\level19.json" />
+    <None Remove="Assets\level2.json" />
+    <None Remove="Assets\level20.json" />
+    <None Remove="Assets\level21.json" />
+    <None Remove="Assets\level22.json" />
+    <None Remove="Assets\level23.json" />
+    <None Remove="Assets\level24.json" />
+    <None Remove="Assets\level25.json" />
+    <None Remove="Assets\level26.json" />
+    <None Remove="Assets\level27.json" />
+    <None Remove="Assets\level28.json" />
+    <None Remove="Assets\level29.json" />
+    <None Remove="Assets\level3.json" />
+    <None Remove="Assets\level30.json" />
+    <None Remove="Assets\level31.json" />
+    <None Remove="Assets\level32.json" />
+    <None Remove="Assets\level33.json" />
+    <None Remove="Assets\level34.json" />
+    <None Remove="Assets\level35.json" />
+    <None Remove="Assets\level36.json" />
+    <None Remove="Assets\level37.json" />
+    <None Remove="Assets\level38.json" />
+    <None Remove="Assets\level39.json" />
+    <None Remove="Assets\level4.json" />
+    <None Remove="Assets\level40.json" />
+    <None Remove="Assets\level41.json" />
+    <None Remove="Assets\level42.json" />
+    <None Remove="Assets\level43.json" />
+    <None Remove="Assets\level44.json" />
+    <None Remove="Assets\level45.json" />
+    <None Remove="Assets\level46.json" />
+    <None Remove="Assets\level47.json" />
+    <None Remove="Assets\level48.json" />
+    <None Remove="Assets\level49.json" />
+    <None Remove="Assets\level5.json" />
+    <None Remove="Assets\level50.json" />
+    <None Remove="Assets\level51.json" />
+    <None Remove="Assets\level52.json" />
+    <None Remove="Assets\level53.json" />
+    <None Remove="Assets\level54.json" />
+    <None Remove="Assets\level55.json" />
+    <None Remove="Assets\level56.json" />
+    <None Remove="Assets\level57.json" />
+    <None Remove="Assets\level58.json" />
+    <None Remove="Assets\level59.json" />
+    <None Remove="Assets\level6.json" />
+    <None Remove="Assets\level60.json" />
+    <None Remove="Assets\level61.json" />
+    <None Remove="Assets\level62.json" />
+    <None Remove="Assets\level63.json" />
+    <None Remove="Assets\level64.json" />
+    <None Remove="Assets\level65.json" />
+    <None Remove="Assets\level66.json" />
+    <None Remove="Assets\level67.json" />
+    <None Remove="Assets\level68.json" />
+    <None Remove="Assets\level69.json" />
+    <None Remove="Assets\level7.json" />
+    <None Remove="Assets\level70.json" />
+    <None Remove="Assets\level71.json" />
+    <None Remove="Assets\level72.json" />
+    <None Remove="Assets\level73.json" />
+    <None Remove="Assets\level74.json" />
+    <None Remove="Assets\level75.json" />
+    <None Remove="Assets\level76.json" />
+    <None Remove="Assets\level77.json" />
+    <None Remove="Assets\level78.json" />
+    <None Remove="Assets\level79.json" />
+    <None Remove="Assets\level8.json" />
+    <None Remove="Assets\level80.json" />
+    <None Remove="Assets\level81.json" />
+    <None Remove="Assets\level82.json" />
+    <None Remove="Assets\level83.json" />
+    <None Remove="Assets\level84.json" />
+    <None Remove="Assets\level85.json" />
+    <None Remove="Assets\level86.json" />
+    <None Remove="Assets\level87.json" />
+    <None Remove="Assets\level88.json" />
+    <None Remove="Assets\level89.json" />
+    <None Remove="Assets\level9.json" />
+    <None Remove="Assets\level90.json" />
+    <None Remove="Assets\level91.json" />
+    <None Remove="Assets\level92.json" />
+    <None Remove="Assets\level93.json" />
+    <None Remove="Assets\level94.json" />
+    <None Remove="Assets\level95.json" />
+    <None Remove="Assets\level96.json" />
+    <None Remove="Assets\level97.json" />
+    <None Remove="Assets\level98.json" />
+    <None Remove="Assets\level99.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bloxle.Common\Bloxle.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\level1.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level10.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level100.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level11.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level12.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level13.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level14.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level15.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level16.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level17.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level18.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level19.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level2.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level20.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level21.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level22.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level23.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level24.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level25.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level26.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level27.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level28.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level29.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level3.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level30.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level31.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level32.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level33.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level34.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level35.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level36.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level37.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level38.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level39.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level4.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level40.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level41.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level42.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level43.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level44.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level45.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level46.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level47.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level48.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level49.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level5.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level50.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level51.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level52.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level53.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level54.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level55.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level56.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level57.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level58.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level59.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level6.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level60.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level61.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level62.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level63.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level64.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level65.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level66.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level67.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level68.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level69.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level7.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level70.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level71.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level72.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level73.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level74.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level75.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level76.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level77.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level78.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level79.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level8.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level80.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level81.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level82.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level83.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level84.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level85.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level86.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level87.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level88.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level89.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level9.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level90.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level91.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level92.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level93.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level94.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level95.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level96.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level97.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level98.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Update="Assets\level99.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

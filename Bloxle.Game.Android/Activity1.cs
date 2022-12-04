@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using System.IO;
 
 using Bloxle.Game.Shared.Game;
+using Android.Content.Res;
+using System.Linq;
 
 namespace Bloxle.Game.Android
 {
@@ -30,8 +32,28 @@ namespace Bloxle.Game.Android
         {
             base.OnCreate(bundle);
 
+
+
             string levelFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Content/Levels/");
             string progressFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Content/Progress/");
+
+            if (!Directory.Exists(levelFolder))
+            {
+                Directory.CreateDirectory(levelFolder);
+
+                string content;
+                AssetManager assets = this.Assets;
+                var levelAssetPaths = assets.List("").Where(x => x.StartsWith("level"));
+                foreach (var levelAssetPath in levelAssetPaths)
+                {
+                    using (StreamReader sr = new StreamReader(assets.Open(levelAssetPath)))
+                    {
+                        var levelPath = Path.Combine(levelFolder, levelAssetPath);
+                        content = sr.ReadToEnd();
+                        File.WriteAllText(levelPath, content);
+                    }
+                }
+            }
 
             _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder);
             _view = _game.Services.GetService(typeof(View)) as View;

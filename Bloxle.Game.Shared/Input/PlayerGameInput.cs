@@ -7,6 +7,7 @@ using Bloxle.Common.Levels;
 using Bloxle.Game.Shared.Commands;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Bloxle.Game.Shared.Input
 {
@@ -39,23 +40,41 @@ namespace Bloxle.Game.Shared.Input
             if (mouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)
             {
                 var mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                var tilePosition = ConvertToTilePosition(mousePosition).ToNumerics();
+                command = ProcessCommands(command, mousePosition);
+            }
 
-                if (_tileGrid.IsWithinBounds(tilePosition))
+            var touchState = TouchPanel.GetState();
+
+            foreach (var touch in touchState)
+            {
+                if (touch.State == TouchLocationState.Released)
                 {
-                    _moveStack.Push(tilePosition);
-                    command = new MoveCommand(_tileGrid, tilePosition);
-                }
-                else if (tilePosition.X == 9 && tilePosition.Y == 0)
-                {
-                    if (_moveStack.Any()) {
-                        Vector2 lastMovePosition = _moveStack.Pop();
-                        command = new UndoCommand(_tileGrid, lastMovePosition.ToNumerics());
-                    }
+                    command = ProcessCommands(command, touch.Position);
                 }
             }
 
             _lastMouseState = mouseState;
+
+            return command;
+        }
+
+        private ICommand ProcessCommands(ICommand command, Vector2 screenPosition)
+        {
+            var tilePosition = ConvertToTilePosition(screenPosition).ToNumerics();
+
+            if (_tileGrid.IsWithinBounds(tilePosition))
+            {
+                _moveStack.Push(tilePosition);
+                command = new MoveCommand(_tileGrid, tilePosition);
+            }
+            else if (tilePosition.X == 9 && tilePosition.Y == 0)
+            {
+                if (_moveStack.Any())
+                {
+                    Vector2 lastMovePosition = _moveStack.Pop();
+                    command = new UndoCommand(_tileGrid, lastMovePosition.ToNumerics());
+                }
+            }
 
             return command;
         }

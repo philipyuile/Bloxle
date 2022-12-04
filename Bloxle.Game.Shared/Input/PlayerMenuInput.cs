@@ -5,6 +5,7 @@ using Bloxle.Common.Interfaces;
 using Bloxle.Common.Storage;
 using Bloxle.Game.Shared.Commands;
 using Bloxle.Game.Shared.Menu;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Bloxle.Game.Shared.Input
 {
@@ -36,22 +37,39 @@ namespace Bloxle.Game.Shared.Input
             if (mouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)
             {
                 var mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                var tilePosition = ConvertToTilePosition(mousePosition);
-                if (tilePosition.X >= 0 && tilePosition.X < _menuGrid.GetWidth() && tilePosition.Y >= 0 && tilePosition.Y < _menuGrid.GetHeight())
+                command = ProcessCommands(command, mousePosition);
+            }
+
+            var touchState = TouchPanel.GetState();
+
+            foreach (var touch in touchState)
+            {
+                if (touch.State == TouchLocationState.Released)
                 {
-                    command = new MenuSelectionCommand(_menuGrid, tilePosition, _gameProgress);
-                }
-                else if (tilePosition.X == 5 && tilePosition.Y == 3)
-                {
-                    command = new MenuPageDecrementCommand(_menuGrid);
-                }
-                else if (tilePosition.X == 6 && tilePosition.Y == 3)
-                {
-                    command = new MenuPageIncrementCommand(_menuGrid);
+                    command = ProcessCommands(command, touch.Position);
                 }
             }
 
             _lastMouseState = mouseState;
+
+            return command;
+        }
+
+        private ICommand ProcessCommands(ICommand command, Vector2 screenPosition)
+        {
+            var tilePosition = ConvertToTilePosition(screenPosition);
+            if (tilePosition.X >= 0 && tilePosition.X < _menuGrid.GetWidth() && tilePosition.Y >= 0 && tilePosition.Y < _menuGrid.GetHeight())
+            {
+                command = new MenuSelectionCommand(_menuGrid, tilePosition, _gameProgress);
+            }
+            else if (tilePosition.X == 5 && tilePosition.Y == 3)
+            {
+                command = new MenuPageDecrementCommand(_menuGrid);
+            }
+            else if (tilePosition.X == 6 && tilePosition.Y == 3)
+            {
+                command = new MenuPageIncrementCommand(_menuGrid);
+            }
 
             return command;
         }
