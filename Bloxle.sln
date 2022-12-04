@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloxle.Game", "Bloxle.Game\Bloxle.Game.csproj", "{E2030AB0-2E6E-486A-84CB-FB6FE95087E2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloxle.Common", "Bloxle.Common\Bloxle.Common.csproj", "{1A90F8EB-B61E-441C-B2F5-85E96770DCD5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloxle.AIGeneration", "Bloxle.AIGeneration\Bloxle.AIGeneration.csproj", "{5D175AD8-42D4-4501-964F-0C281AEC86CB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloxle.Game.Android", "Bloxle.Game.Android\Bloxle.Game.Android.csproj", "{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bloxle.Game.Desktop", "Bloxle.Game.Desktop\Bloxle.Game.Desktop.csproj", "{74995F19-73AD-49EF-B6DF-C0AED6E709FD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Bloxle.Game.Shared", "Bloxle.Game.Shared\Bloxle.Game.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E2030AB0-2E6E-486A-84CB-FB6FE95087E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2030AB0-2E6E-486A-84CB-FB6FE95087E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2030AB0-2E6E-486A-84CB-FB6FE95087E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2030AB0-2E6E-486A-84CB-FB6FE95087E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A90F8EB-B61E-441C-B2F5-85E96770DCD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A90F8EB-B61E-441C-B2F5-85E96770DCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A90F8EB-B61E-441C-B2F5-85E96770DCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,11 +27,26 @@ Global
 		{5D175AD8-42D4-4501-964F-0C281AEC86CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D175AD8-42D4-4501-964F-0C281AEC86CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D175AD8-42D4-4501-964F-0C281AEC86CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E466016-B69B-4B1F-B320-FC88ADFE9EC4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{74995F19-73AD-49EF-B6DF-C0AED6E709FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74995F19-73AD-49EF-B6DF-C0AED6E709FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74995F19-73AD-49EF-B6DF-C0AED6E709FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74995F19-73AD-49EF-B6DF-C0AED6E709FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9CCB88A-E1E9-4B4B-9B75-4FEEF15F8C0D}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Bloxle.Game.Shared\Bloxle.Game.Shared.projitems*{0e466016-b69b-4b1f-b320-fc88adfe9ec4}*SharedItemsImports = 5
+		Bloxle.Game.Shared\Bloxle.Game.Shared.projitems*{74995f19-73ad-49ef-b6df-c0aed6e709fd}*SharedItemsImports = 5
+		Bloxle.Game.Shared\Bloxle.Game.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

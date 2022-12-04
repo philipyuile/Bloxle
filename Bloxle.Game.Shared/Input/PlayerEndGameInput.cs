@@ -2,9 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 using Bloxle.Common.Interfaces;
-using Bloxle.Game.Commands;
+using Bloxle.Game.Shared.Commands;
 
-namespace Bloxle.Game.Input
+namespace Bloxle.Game.Shared.Input
 {
     class PlayerEndGameInput : IGameInput
     {

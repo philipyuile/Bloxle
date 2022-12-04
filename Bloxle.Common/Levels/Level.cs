@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
+using System.Numerics;
 
 using Bloxle.Common.Enums;
 

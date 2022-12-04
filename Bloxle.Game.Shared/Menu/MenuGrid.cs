@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Linq;
 
-namespace Bloxle.Game.Menu
+namespace Bloxle.Game.Shared.Menu
 {
     public class MenuGrid
     {

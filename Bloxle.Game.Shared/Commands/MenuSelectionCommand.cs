@@ -2,9 +2,9 @@ using Microsoft.Xna.Framework;
 using Bloxle.Common.Interfaces;
 using Bloxle.Common.Storage;
 
-using Bloxle.Game.Menu;
+using Bloxle.Game.Shared.Menu;
 
-namespace Bloxle.Game.Commands
+namespace Bloxle.Game.Shared.Commands
 {
     class MenuSelectionCommand : ICommand
     {

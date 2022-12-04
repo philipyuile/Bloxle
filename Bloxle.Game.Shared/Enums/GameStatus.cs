@@ -1,4 +1,4 @@
-﻿namespace Bloxle.Game.Enums
+﻿namespace Bloxle.Game.Shared.Enums
 {
     public enum GameStatus
     {

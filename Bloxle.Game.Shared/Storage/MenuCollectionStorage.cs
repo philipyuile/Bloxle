@@ -1,7 +1,7 @@
-﻿using Bloxle.Game.Menu;
+﻿using Bloxle.Game.Shared.Menu;
 using System.IO;
 
-namespace Bloxle.Game.Storage
+namespace Bloxle.Game.Shared.Storage
 {
     public class MenuCollectionStorage
     {

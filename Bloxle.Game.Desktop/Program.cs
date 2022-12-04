@@ -1,5 +1,5 @@
 ﻿using System;
-using Bloxle.Game.Game;
+using Bloxle.Game.Shared.Game;
 using Serilog;
 
 namespace Bloxle
@@ -27,7 +27,8 @@ namespace Bloxle
                     menu.Run();
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Log.Logger.Error(e.Message);
                 Log.Logger.Error(e.StackTrace);
 

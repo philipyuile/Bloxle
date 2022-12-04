@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Bloxle.Game.Menu
+namespace Bloxle.Game.Shared.Menu
 {
     public class MenuTile
     {

@@ -8,14 +8,14 @@ using Bloxle.Common.Storage;
 using Bloxle.Common.Enums;
 using Bloxle.Common.Levels;
 
-using Bloxle.Game.Commands;
-using Bloxle.Game.Input;
-using Bloxle.Game.Enums;
-using Bloxle.Game.Storage;
-using Bloxle.Game.Menu;
+using Bloxle.Game.Shared.Commands;
+using Bloxle.Game.Shared.Input;
+using Bloxle.Game.Shared.Enums;
+using Bloxle.Game.Shared.Storage;
+using Bloxle.Game.Shared.Menu;
 using System;
 
-namespace Bloxle.Game.Game
+namespace Bloxle.Game.Shared.Game
 {
     public class GameScreen : Microsoft.Xna.Framework.Game
     {

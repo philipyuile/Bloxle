@@ -1,15 +1,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-using Bloxle.Common.Input;
 using Bloxle.Common.Interfaces;
 using Bloxle.Common.Commands;
 using Bloxle.Common.Levels;
-using Bloxle.Game.Commands;
+using Bloxle.Game.Shared.Commands;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Bloxle.Game.Input
+namespace Bloxle.Game.Shared.Input
 {
     class PlayerGameInput : IGameInput
     {
@@ -40,7 +39,7 @@ namespace Bloxle.Game.Input
             if (mouseState.LeftButton == ButtonState.Released && _lastMouseState.LeftButton == ButtonState.Pressed)
             {
                 var mousePosition = new Vector2(mouseState.X, mouseState.Y);
-                var tilePosition = ConvertToTilePosition(mousePosition);
+                var tilePosition = ConvertToTilePosition(mousePosition).ToNumerics();
 
                 if (_tileGrid.IsWithinBounds(tilePosition))
                 {
@@ -51,7 +50,7 @@ namespace Bloxle.Game.Input
                 {
                     if (_moveStack.Any()) {
                         Vector2 lastMovePosition = _moveStack.Pop();
-                        command = new UndoCommand(_tileGrid, lastMovePosition);
+                        command = new UndoCommand(_tileGrid, lastMovePosition.ToNumerics());
                     }
                 }
             }

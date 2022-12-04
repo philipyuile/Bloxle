@@ -2,11 +2,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 using Bloxle.Common.Interfaces;
-using Bloxle.Game.Commands;
-using Bloxle.Game.Menu;
 using Bloxle.Common.Storage;
+using Bloxle.Game.Shared.Commands;
+using Bloxle.Game.Shared.Menu;
 
-namespace Bloxle.Game.Input
+namespace Bloxle.Game.Shared.Input
 {
     class PlayerMenuInput : IGameInput
     {

@@ -1,5 +1,3 @@
-using Microsoft.Xna.Framework;
-
 using Bloxle.Common.Interfaces;
 using Bloxle.Common.Commands;
 using Bloxle.Common.Input;
@@ -7,6 +5,7 @@ using Bloxle.Common.Levels;
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Bloxle.AIGeneration.Input
 {

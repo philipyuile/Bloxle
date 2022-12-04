@@ -1,7 +1,7 @@
 ﻿
 using Bloxle.Common.Input;
 using Bloxle.Common.Levels;
-using Microsoft.Xna.Framework;
+using System.Numerics;
 
 namespace Bloxle.Common.Commands
 {

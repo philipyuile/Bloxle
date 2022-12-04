@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6efba8a9-a407-4029-bdd0-651d22a87386</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Bloxle.Game.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content\Levels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Content\Progress\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\1Pixel.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Arrows\arrows.png" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\Emulogic-zrEw.ttf" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\Small.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\Standard.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\VCR_OSD_MONO.ttf" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Tiles\BasicTiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\ExitCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuPageDecrementCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuPageIncrementCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuSelectionCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\GameStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game\GameScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\PlayerEndGameInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\PlayerGameInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\PlayerMenuInput.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu\MenuGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu\MenuTile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Storage\MenuCollectionStorage.cs" />
+  </ItemGroup>
+</Project>
