@@ -19,8 +19,8 @@ namespace Bloxle.Game.Shared.Game
 {
     public class GameScreen : Microsoft.Xna.Framework.Game
     {
-        public string _levelFolder = "Content/Levels/";
-        public string _progressFolder = "Content/Progress/";
+        string _levelFolder = "Content/Levels/";
+        string _progressFolder = "Content/Progress/";
 
         Texture2D _tilesTexture;
         Texture2D _arrowsTexture;
@@ -59,11 +59,13 @@ namespace Bloxle.Game.Shared.Game
 
         public int SelectedLevel { get { return _menuGrid.SelectedLevel; } }
 
-        public GameScreen(int numberofLevels)
+        public GameScreen(int numberofLevels, string levelFolder, string progressFolder)
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _levelFolder = levelFolder;
+            _progressFolder = progressFolder;
             _numberOfLevels = numberofLevels;
         }
 
@@ -115,18 +117,22 @@ namespace Bloxle.Game.Shared.Game
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _tilesTexture = Content.Load<Texture2D>("Tiles/BasicTiles");
-            _tilesTextureDictionary = new Dictionary<TileColour, Rectangle>();
-            _tilesTextureDictionary.Add(TileColour.Red, new Rectangle(0, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Yellow, new Rectangle(48, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Green, new Rectangle(96, 0, 48, 48));
-            _tilesTextureDictionary.Add(TileColour.Blue, new Rectangle(144, 0, 48, 48));
+            _tilesTextureDictionary = new Dictionary<TileColour, Rectangle>
+            {
+                { TileColour.Red, new Rectangle(0, 0, 48, 48) },
+                { TileColour.Yellow, new Rectangle(48, 0, 48, 48) },
+                { TileColour.Green, new Rectangle(96, 0, 48, 48) },
+                { TileColour.Blue, new Rectangle(144, 0, 48, 48) }
+            };
 
             _arrowsTexture = Content.Load<Texture2D>("Arrows/arrows");
-            _arrowsTextureDictionary = new Dictionary<ArrowDirection, Rectangle>();
-            _arrowsTextureDictionary.Add(ArrowDirection.Up, new Rectangle(32, 0, 32, 32));
-            _arrowsTextureDictionary.Add(ArrowDirection.Left, new Rectangle(0, 32, 32, 32));
-            _arrowsTextureDictionary.Add(ArrowDirection.Down, new Rectangle(32, 32, 32, 32));
-            _arrowsTextureDictionary.Add(ArrowDirection.Right, new Rectangle(64, 32, 32, 32));
+            _arrowsTextureDictionary = new Dictionary<ArrowDirection, Rectangle>
+            {
+                { ArrowDirection.Up, new Rectangle(32, 0, 32, 32) },
+                { ArrowDirection.Left, new Rectangle(0, 32, 32, 32) },
+                { ArrowDirection.Down, new Rectangle(32, 32, 32, 32) },
+                { ArrowDirection.Right, new Rectangle(64, 32, 32, 32) }
+            };
 
             _onePixel = Content.Load<Texture2D>("1Pixel");
 

@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Views;
 using Microsoft.Xna.Framework;
 
+using System.IO;
+
 using Bloxle.Game.Shared.Game;
 
 namespace Bloxle.Game.Android
@@ -28,7 +30,10 @@ namespace Bloxle.Game.Android
         {
             base.OnCreate(bundle);
 
-            _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN);
+            string levelFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Content/Levels/");
+            string progressFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Content/Progress/");
+
+            _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder);
             _view = _game.Services.GetService(typeof(View)) as View;
 
             SetContentView(_view);

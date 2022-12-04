@@ -22,7 +22,10 @@ namespace Bloxle
             {
                 ConfigureLogger();
 
-                using (var menu = new GameScreen(NUMBER_OF_LEVELS_SHOWN))
+                string levelFolder = "Content/Levels/";
+                string progressFolder = "Content/Progress/";
+
+                using (var menu = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder))
                 {
                     menu.Run();
                 }
