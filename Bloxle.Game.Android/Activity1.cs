@@ -55,18 +55,19 @@ namespace Bloxle.Game.Android
                     }
                 }
             }
+            var scale = 1.6;
 
             var displayParams = new DisplayParameters
             {
-                GameOrigin = new Vector2(560, 80),
-                MenuOrigin = new Vector2(200, 140),
-                ScreenWidth = 1600,
-                ScreenHeight = 1200,
+                GameOrigin = new Vector2((int)(280 * scale), (int)(40 * scale)),
+                MenuOrigin = new Vector2((int)(100 * scale), (int)(70 * scale)),
+                ScreenWidth = (int)(800 * scale),
+                ScreenHeight = (int)(600 * scale),
                 GameTileSize = 48,
                 MenuTileSize = 80,
                 MenuTileMargin = 20,
                 ArrowTileSize = 32,
-                TileScale = 2.0
+                TileScale = scale
             };
 
             _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder, displayParams);
