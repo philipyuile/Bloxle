@@ -9,6 +9,7 @@ using Bloxle.Common.Enums;
 using Bloxle.Common.Levels;
 
 using Bloxle.Game.Shared.Commands;
+using Bloxle.Game.Shared.Display;
 using Bloxle.Game.Shared.Input;
 using Bloxle.Game.Shared.Enums;
 using Bloxle.Game.Shared.Storage;
@@ -55,11 +56,13 @@ namespace Bloxle.Game.Shared.Game
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        private DisplayParameters _displayParameters;
+
         public GameStatus Status { get; set; }
 
         public int SelectedLevel { get { return _menuGrid.SelectedLevel; } }
 
-        public GameScreen(int numberofLevels, string levelFolder, string progressFolder)
+        public GameScreen(int numberofLevels, string levelFolder, string progressFolder, DisplayParameters displayParams)
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -67,12 +70,13 @@ namespace Bloxle.Game.Shared.Game
             _levelFolder = levelFolder;
             _progressFolder = progressFolder;
             _numberOfLevels = numberofLevels;
+            _displayParameters = displayParams;
         }
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 800;
-            _graphics.PreferredBackBufferHeight = 600;
+            _graphics.PreferredBackBufferWidth = _displayParameters.ScreenWidth;
+            _graphics.PreferredBackBufferHeight = _displayParameters.ScreenHeight;
 
             _gameProgressStorage = new GameProgressStorage(_progressFolder);
             _gameProgress = _gameProgressStorage.LoadGameProgressFile();
@@ -87,19 +91,19 @@ namespace Bloxle.Game.Shared.Game
         protected void InitialiseGame()
         {
             _playerScore = 0;
-            _gridOrigin = new Vector2(280, 40);
+            _gridOrigin = _displayParameters.GameOrigin;
 
             _gameStorage = new GenerationFileStorage(_levelFolder, SelectedLevel);
 
             _levelGrid = _gameStorage.LoadGameFile();
             _targetScore = _levelGrid.TargetScore;
 
-            _gameInput = new PlayerGameInput(_levelGrid, _gridOrigin);
+            _gameInput = new PlayerGameInput(_levelGrid, _gridOrigin, _displayParameters);
         }
 
         protected void InitialiseMenu()
         {
-            _gridOrigin = new Vector2(100, 70);
+            _gridOrigin = _displayParameters.MenuOrigin;
 
             _menuStorage = new MenuCollectionStorage(_levelFolder, _numberOfLevels);
             MenuTile[] menuItems = _menuStorage.LoadMenuCollection();
@@ -108,7 +112,7 @@ namespace Bloxle.Game.Shared.Game
             _menuGrid.SelectedLevel = 0;
             _menuGrid.CurrentPageNumber = _menuGrid.PageOfLevel(_gameProgress.GetMinimumIncompleteLevel());
 
-            _menuInput = new PlayerMenuInput(_menuGrid, _gridOrigin, _gameProgress);
+            _menuInput = new PlayerMenuInput(_menuGrid, _gridOrigin, _gameProgress, _displayParameters);
             _endGameInput = new PlayerEndGameInput();
         }
 
@@ -117,21 +121,25 @@ namespace Bloxle.Game.Shared.Game
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _tilesTexture = Content.Load<Texture2D>("Tiles/BasicTiles");
+
+            int gameTileSize = _displayParameters.GameTileSize;
+            var arrowTileSize = _displayParameters.ArrowTileSize;
+
             _tilesTextureDictionary = new Dictionary<TileColour, Rectangle>
             {
-                { TileColour.Red, new Rectangle(0, 0, 48, 48) },
-                { TileColour.Yellow, new Rectangle(48, 0, 48, 48) },
-                { TileColour.Green, new Rectangle(96, 0, 48, 48) },
-                { TileColour.Blue, new Rectangle(144, 0, 48, 48) }
+                { TileColour.Red, new Rectangle(0, 0, gameTileSize, gameTileSize) },
+                { TileColour.Yellow, new Rectangle(gameTileSize, 0, gameTileSize, gameTileSize) },
+                { TileColour.Green, new Rectangle(gameTileSize * 2, 0, gameTileSize, gameTileSize) },
+                { TileColour.Blue, new Rectangle(gameTileSize * 3, 0, gameTileSize, gameTileSize) }
             };
 
             _arrowsTexture = Content.Load<Texture2D>("Arrows/arrows");
             _arrowsTextureDictionary = new Dictionary<ArrowDirection, Rectangle>
             {
-                { ArrowDirection.Up, new Rectangle(32, 0, 32, 32) },
-                { ArrowDirection.Left, new Rectangle(0, 32, 32, 32) },
-                { ArrowDirection.Down, new Rectangle(32, 32, 32, 32) },
-                { ArrowDirection.Right, new Rectangle(64, 32, 32, 32) }
+                { ArrowDirection.Up, new Rectangle(arrowTileSize, 0, arrowTileSize, arrowTileSize) },
+                { ArrowDirection.Left, new Rectangle(0, arrowTileSize, arrowTileSize, arrowTileSize) },
+                { ArrowDirection.Down, new Rectangle(arrowTileSize, arrowTileSize, arrowTileSize, arrowTileSize) },
+                { ArrowDirection.Right, new Rectangle(2 * arrowTileSize, arrowTileSize, arrowTileSize, arrowTileSize) }
             };
 
             _onePixel = Content.Load<Texture2D>("1Pixel");
@@ -143,7 +151,7 @@ namespace Bloxle.Game.Shared.Game
             _overlayRectangle.SetData(new[] { new Color (100,100,100,100) });
 
             _menuTileRectangle = new Texture2D(GraphicsDevice, 1, 1);
-            _menuTileRectangle.SetData(new[] { new Color(100, 100, 100, 100) });
+            _menuTileRectangle.SetData(new[] { new Color(100,100,100,100) });
 
         }
 
@@ -238,7 +246,7 @@ namespace Bloxle.Game.Shared.Game
                 Color.White,
                 0f,
                 Vector2.Zero,
-                Vector2.One,
+                new Vector2((float)_displayParameters.TileScale),
                 SpriteEffects.None,
                 0f
             );
@@ -253,7 +261,7 @@ namespace Bloxle.Game.Shared.Game
                 Color.White,
                 0f,
                 Vector2.Zero,
-                Vector2.One,
+                new Vector2((float)_displayParameters.TileScale),
                 SpriteEffects.None,
                 0f
             );
@@ -261,71 +269,83 @@ namespace Bloxle.Game.Shared.Game
 
         private void DrawMenuTile(int levelNumber, Vector2 position)
         {
+            var scaledMenuTileSize = (int)(_displayParameters.TileScale * _displayParameters.MenuTileSize);
+            var tileScale = _displayParameters.TileScale;
+
             var drawablePosition = ConvertToDrawableMenuPosition(position);
             _spriteBatch.Draw(
              _menuTileRectangle,
-             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, 80, 80),
+             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, scaledMenuTileSize, scaledMenuTileSize),
              new Color(20, 20, 20, 200)
             );
 
             if (levelNumber <= _gameProgress.GetMinimumIncompleteLevel())
             {
-                _spriteBatch.DrawString(_headerFont, $"{levelNumber}", new Vector2(drawablePosition.X + (levelNumber > 9 ? 15 : 27), drawablePosition.Y + 15), Color.White);
+                _spriteBatch.DrawString(_headerFont, $"{levelNumber}", new Vector2(drawablePosition.X + (levelNumber > 9 ? (int)(15 * tileScale) : (int)(27 * tileScale)), drawablePosition.Y + (int)(15 * tileScale)), Color.White);
             }
             else
             {
-                _spriteBatch.DrawString(_headerFont, "X", new Vector2(drawablePosition.X + 27, drawablePosition.Y + 15), Color.White);
+                _spriteBatch.DrawString(_headerFont, "X", new Vector2(drawablePosition.X + (int)(27 * tileScale), drawablePosition.Y + (int)(15 * tileScale)), Color.White);
             }
         }
 
         private void DrawMenuPaginationTile(bool isIncrement, Vector2 position)
         {
+            var scaledMenuTileSize = (int)(_displayParameters.TileScale * _displayParameters.MenuTileSize);
+            var tileScale = _displayParameters.TileScale;
+
             var drawablePosition = ConvertToDrawableMenuPosition(position);
             _spriteBatch.Draw(
              _menuTileRectangle,
-             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, 80, 80),
+             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, scaledMenuTileSize, scaledMenuTileSize),
              new Color(20, 20, 20, 200)
             );
 
             if (isIncrement)
             {
-                _spriteBatch.DrawString(_headerFont, $">", new Vector2(drawablePosition.X + 27, drawablePosition.Y + 15), Color.White);
+                _spriteBatch.DrawString(_headerFont, $">", new Vector2(drawablePosition.X + (int)(27 * tileScale), drawablePosition.Y + (int)(15 * tileScale)), Color.White);
             }
             else
             {
-                _spriteBatch.DrawString(_headerFont, "<", new Vector2(drawablePosition.X + 27, drawablePosition.Y + 15), Color.White);
+                _spriteBatch.DrawString(_headerFont, "<", new Vector2(drawablePosition.X + (int)(27 * tileScale), drawablePosition.Y + (int)(15 * tileScale)), Color.White);
             }
         }
 
         private void DrawGhostTile(int moveNumber, Vector2 position)
         {
+            var scaledGameTileSize = (int)(_displayParameters.TileScale * _displayParameters.GameTileSize);
+            var tileScale = _displayParameters.TileScale;
+
             var drawablePosition = ConvertToDrawableTilePosition(position);
             _spriteBatch.Draw(
              _menuTileRectangle,
-             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, 48, 48),
+             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, scaledGameTileSize, scaledGameTileSize),
              new Color(20, 20, 20)
             );
 
-            _spriteBatch.DrawString(_textFont, $"{moveNumber}", new Vector2(drawablePosition.X + 16, drawablePosition.Y + 12), Color.White);
+            _spriteBatch.DrawString(_textFont, $"{moveNumber}", new Vector2(drawablePosition.X + (int)(16 * tileScale), drawablePosition.Y + (int)(12 * tileScale)), Color.White);
 
         }
 
         private void DrawAccentedGhostTile(int moveNumber, Vector2 position)
         {
+            var scaledGameTileSize = (int)(_displayParameters.TileScale * _displayParameters.GameTileSize);
+            var tileScale = _displayParameters.TileScale;
+
             var drawablePosition = ConvertToDrawableTilePosition(position);
             _spriteBatch.Draw(
              _menuTileRectangle,
-             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, 48, 48),
+             new Rectangle((int)drawablePosition.X, (int)drawablePosition.Y, scaledGameTileSize, scaledGameTileSize),
              new Color(255, 0, 0)
             );
 
             _spriteBatch.Draw(
              _menuTileRectangle,
-             new Rectangle((int)drawablePosition.X + 1, (int)drawablePosition.Y + 1, 46, 46),
+             new Rectangle((int)drawablePosition.X + 1, (int)drawablePosition.Y + 1, scaledGameTileSize - (int)(2 * tileScale), scaledGameTileSize - (int)(2 * tileScale)),
              new Color(20, 20, 20)
             );
 
-            _spriteBatch.DrawString(_textFont, $"{moveNumber}", new Vector2(drawablePosition.X + 16, drawablePosition.Y + 12), Color.White);
+            _spriteBatch.DrawString(_textFont, $"{moveNumber}", new Vector2(drawablePosition.X + (int)(16 * tileScale), drawablePosition.Y + (int)(12 * tileScale)), Color.White);
 
         }
 
@@ -340,31 +360,40 @@ namespace Bloxle.Game.Shared.Game
 
         private Vector2 ConvertToDrawableTilePosition(Vector2 position)
         {
-            return new Vector2(_gridOrigin.X + position.X * 48, _gridOrigin.Y + position.Y * 48);
+            var scaledGameTileSize = (int)(_displayParameters.TileScale * _displayParameters.GameTileSize);
+
+            return new Vector2(_gridOrigin.X + position.X * scaledGameTileSize, _gridOrigin.Y + position.Y * scaledGameTileSize);
         }
 
         private Vector2 ConvertToDrawableArrowPosition(Vector2 position)
         {
-            return new Vector2(_gridOrigin.X + 8 + position.X * 48, _gridOrigin.Y + 8 + position.Y * 48);
+            var scaledGameTileSize = (int)(_displayParameters.TileScale * _displayParameters.GameTileSize);
+            var tileScale = _displayParameters.TileScale;
+
+            return new Vector2(_gridOrigin.X + (int)(8 * tileScale) + position.X * scaledGameTileSize, _gridOrigin.Y + (int)(8 * tileScale) + position.Y * scaledGameTileSize);
         }
 
         private Vector2 ConvertToDrawableMenuPosition(Vector2 position)
         {
-            return new Vector2(_gridOrigin.X + position.X * 100, _gridOrigin.Y + position.Y * 100);
+            var scaledMenuTileWithMarginSize = (int)(_displayParameters.TileScale * (_displayParameters.MenuTileSize + _displayParameters.MenuTileMargin));
+
+            return new Vector2(_gridOrigin.X + position.X * scaledMenuTileWithMarginSize, _gridOrigin.Y + position.Y * scaledMenuTileWithMarginSize);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            var tileScale = _displayParameters.TileScale;
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
 
             if (Status == GameStatus.InGame || Status == GameStatus.Success || Status == GameStatus.Failure)
             {
-                _spriteBatch.DrawString(_textFont, $"Moves: {_playerScore}", new Vector2(118, 10), Color.White);
-                _spriteBatch.DrawString(_textFont, $"Target: {((int)(_targetScore))}", new Vector2(104, 35), Color.White);
+                _spriteBatch.DrawString(_textFont, $"Moves: {_playerScore}", new Vector2((int)(118 * tileScale), (int)(10 * tileScale)), Color.White);
+                _spriteBatch.DrawString(_textFont, $"Target: {((int)(_targetScore))}", new Vector2((int)(104 * tileScale), (int)(35 * tileScale)), Color.White);
 
-                _spriteBatch.DrawString(_textFont, "Cycle:", new Vector2(10, 150), Color.White);
+                _spriteBatch.DrawString(_textFont, "Cycle:", new Vector2((int)(10 * tileScale), (int)(150 * tileScale)), Color.White);
 
                 DrawTile(TileColour.Red, new Vector2 { X = -4, Y = 1 });
                 DrawArrow(ArrowDirection.Right, new Vector2 { X = -3, Y = 1 });
@@ -375,7 +404,7 @@ namespace Bloxle.Game.Shared.Game
                 DrawTile(TileColour.Blue, new Vector2 { X = -4, Y = 3 });
                 DrawArrow(ArrowDirection.Up, new Vector2 { X = -4, Y = 2 });
 
-                _spriteBatch.DrawString(_textFont, "Click\nEffect:", new Vector2(10, 275), Color.White);
+                _spriteBatch.DrawString(_textFont, "Click\nEffect:", new Vector2((int)(10 * tileScale), (int)(275 * tileScale)), Color.White);
 
                 DrawGhostTile(1, new Vector2(-3, 5));
                 DrawGhostTile(1, new Vector2(-4, 6));
@@ -383,9 +412,9 @@ namespace Bloxle.Game.Shared.Game
                 DrawGhostTile(1, new Vector2(-2, 6));
                 DrawGhostTile(1, new Vector2(-3, 7));
 
-                _spriteBatch.DrawString(_textFont, "Click the grid and try to turn all tiles green", new Vector2(20, 440), Color.White);
+                _spriteBatch.DrawString(_textFont, "Click the grid and try to turn all tiles green", new Vector2((int)(20 * tileScale), (int)(440 * tileScale)), Color.White);
 
-                DrawLine(new Vector2(256, 20), new Vector2(256, 430), Color.White);
+                DrawLine(new Vector2((int)(256 * tileScale), (int)(20 * tileScale)), new Vector2((int)(256 * tileScale), (int)(430 * tileScale)), Color.White);
 
                 foreach (var tile in _levelGrid.TileGrid)
                 {
@@ -395,7 +424,7 @@ namespace Bloxle.Game.Shared.Game
                     }
                 }
 
-                _spriteBatch.DrawString(_textFont, "Undo", new Vector2(705, 90), Color.White);
+                _spriteBatch.DrawString(_textFont, "Undo", new Vector2((int)(705 * tileScale), (int)(90 * tileScale)), Color.White);
                 DrawTile(TileColour.Red, new Vector2 { X = 9, Y = 0 });
             }
 
@@ -403,19 +432,19 @@ namespace Bloxle.Game.Shared.Game
             {
                 _spriteBatch.Draw(
                     _overlayRectangle,
-                    new Rectangle(0, 100, 800, 300),
+                    new Rectangle(0, _displayParameters.ScreenHeight / 6, _displayParameters.ScreenWidth, _displayParameters.ScreenHeight / 2),
                     new Color(0, 0, 0, 200)
                 );
 
                 string message = Status == GameStatus.Success ? "You Win!" : "Sorry, you ran out of moves!";
-                Vector2 messagePosition = Status == GameStatus.Success ? new Vector2(350, 200) : new Vector2(100, 200);
+                Vector2 messagePosition = Status == GameStatus.Success ? new Vector2((int)(350 * tileScale), (int)(200 * tileScale)) : new Vector2((int)(100 * tileScale), (int)(200 * tileScale));
 
                 _spriteBatch.DrawString(_headerFont, message, messagePosition, Color.White);
             }
 
             if (Status == GameStatus.Menu)
             {
-                _spriteBatch.DrawString(_headerFont, $"Choose a level: ", new Vector2(100, 10), Color.White);
+                _spriteBatch.DrawString(_headerFont, $"Choose a level: ", new Vector2((int)(100 * tileScale), (int)(10 * tileScale)), Color.White);
 
                 foreach (var tile in _menuGrid.GetLevelsForCurrentPage())
                 {

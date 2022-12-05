@@ -6,6 +6,7 @@ using Bloxle.Common.Storage;
 using Bloxle.Game.Shared.Commands;
 using Bloxle.Game.Shared.Menu;
 using Microsoft.Xna.Framework.Input.Touch;
+using Bloxle.Game.Shared.Display;
 
 namespace Bloxle.Game.Shared.Input
 {
@@ -15,12 +16,14 @@ namespace Bloxle.Game.Shared.Input
         private MenuGrid _menuGrid;
         private Vector2 _gridOrigin;
         private GameProgress _gameProgress;
+        private DisplayParameters _displayParameters;
 
-        public PlayerMenuInput(MenuGrid menuGrid, Vector2 gridOrigin, GameProgress gameProgress) {
+        public PlayerMenuInput(MenuGrid menuGrid, Vector2 gridOrigin, GameProgress gameProgress, DisplayParameters displayParams) {
             _lastMouseState = Mouse.GetState();
             _menuGrid = menuGrid;
             _gridOrigin = gridOrigin;
             _gameProgress = gameProgress;
+            _displayParameters = displayParams;
         }
 
         public ICommand GetInputCommand()
@@ -76,7 +79,8 @@ namespace Bloxle.Game.Shared.Input
 
         private Vector2 ConvertToTilePosition(Vector2 position)
         {
-            var tilePosition = new Vector2((int)((position.X - _gridOrigin.X) / 100), (int)((position.Y - _gridOrigin.Y) / 100));
+            var menuTileSizeIncludingMargin = (int)((_displayParameters.MenuTileSize + _displayParameters.MenuTileMargin) * _displayParameters.TileScale);
+            var tilePosition = new Vector2((int)((position.X - _gridOrigin.X) / menuTileSizeIncludingMargin), (int)((position.Y - _gridOrigin.Y) / menuTileSizeIncludingMargin));
             return tilePosition;
         }
     }

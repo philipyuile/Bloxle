@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuPageDecrementCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuPageIncrementCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\MenuSelectionCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Display\DisplayParameters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums\GameStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game\GameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\PlayerEndGameInput.cs" />

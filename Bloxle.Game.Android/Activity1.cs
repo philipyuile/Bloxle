@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 
 using System.IO;
 
+using Bloxle.Game.Shared.Display;
 using Bloxle.Game.Shared.Game;
 using Android.Content.Res;
 using System.Linq;
@@ -55,7 +56,20 @@ namespace Bloxle.Game.Android
                 }
             }
 
-            _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder);
+            var displayParams = new DisplayParameters
+            {
+                GameOrigin = new Vector2(560, 80),
+                MenuOrigin = new Vector2(200, 140),
+                ScreenWidth = 1600,
+                ScreenHeight = 1200,
+                GameTileSize = 48,
+                MenuTileSize = 80,
+                MenuTileMargin = 20,
+                ArrowTileSize = 32,
+                TileScale = 2.0
+            };
+
+            _game = new GameScreen(NUMBER_OF_LEVELS_SHOWN, levelFolder, progressFolder, displayParams);
             _view = _game.Services.GetService(typeof(View)) as View;
 
             SetContentView(_view);

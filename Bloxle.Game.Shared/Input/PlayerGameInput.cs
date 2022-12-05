@@ -5,6 +5,7 @@ using Bloxle.Common.Interfaces;
 using Bloxle.Common.Commands;
 using Bloxle.Common.Levels;
 using Bloxle.Game.Shared.Commands;
+using Bloxle.Game.Shared.Display;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework.Input.Touch;
@@ -17,13 +18,14 @@ namespace Bloxle.Game.Shared.Input
         private Level _tileGrid;
         private Vector2 _gridOrigin;
         private Stack<Vector2> _moveStack;
+        private DisplayParameters _displayParameters;
 
-        public PlayerGameInput(Level tileGrid, Vector2 gridOrigin) {
+        public PlayerGameInput(Level tileGrid, Vector2 gridOrigin, DisplayParameters displayParams) {
             _lastMouseState = Mouse.GetState();
             _tileGrid = tileGrid;
             _gridOrigin = gridOrigin;
             _moveStack = new Stack<Vector2>();
-            
+            _displayParameters = displayParams;
         }
 
         public ICommand GetInputCommand()
@@ -81,7 +83,9 @@ namespace Bloxle.Game.Shared.Input
 
         private Vector2 ConvertToTilePosition(Vector2 position)
         {
-            var tilePosition = new Vector2((int)((position.X - _gridOrigin.X) / 48), (int)((position.Y - _gridOrigin.Y) / 48));
+            var scaledGameTileSize = (int)(_displayParameters.TileScale * _displayParameters.GameTileSize);
+
+            var tilePosition = new Vector2((int)((position.X - _gridOrigin.X) / scaledGameTileSize), (int)((position.Y - _gridOrigin.Y) / scaledGameTileSize));
             return tilePosition;
         }
     }
